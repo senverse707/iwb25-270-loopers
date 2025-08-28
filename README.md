@@ -24,8 +24,8 @@ MoratuwaProjectBallerina/
 │   │   └── test_api.http        # API test collection
 │   └── squid-poll-backend/      # Node.js backend for poll feature
 │       └── index.js
-│
-└── README.md
+
+
 
 
 
