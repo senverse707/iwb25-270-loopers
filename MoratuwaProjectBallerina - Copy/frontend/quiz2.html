@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    .quiz-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px #af0000;
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .option {
+      background-color: #444;
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #a50000;
+    }
+    .option.correct {
+      background-color: green !important;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+    #nextBtn, #startBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 150px;
+    }
+    #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🧠 Quiz</h1>
+    <div id="quiz">
+      <div class="question" id="questionText">Click below to start the quiz!</div>
+      <div id="options"></div>
+      <div id="result"></div>
+      <button id="startBtn" onclick="startQuiz()" class="btn2">Start Quiz</button>
+      <button id="nextBtn" onclick="nextQuestion()" class="btn2">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "It’s Red Light, Green Light. The doll turns her head—what do you do?",
+        options: ["Run a little slower to be cautious", "Sprint and hope to stop in time", "Freeze immediately", "Lie on the ground"],
+        answer: "Freeze immediately"
+      },
+      {
+        question: "You find yourself in a team for Tug of War—what’s your role?",
+        options: ["Stand anywhere and pull hard", "Be in the middle to balance", "Go in the front to take the lead", "Use a strategy to lean back and hold position"],
+        answer: "Use a strategy to lean back and hold position"
+      },
+      {
+        question: "You’re asked to pick a shape for the Dalgona game. What do you choose?",
+        options: ["Umbrella", "Star", "Circle", "Triangle"],
+        answer: "Circle"
+      },
+      {
+        question: "You have to choose a teammate for the marble game. What kind of person do you pick?",
+        options: ["The strongest player", "Your best friend", "Someone emotional", "Someone who trusts you"],
+        answer: "Someone who trusts you"
+      },
+      {
+        question: "You’re told to cross a bridge with some panels made of tempered glass. You go:",
+        options: ["First", "In the middle", "Last", "Randomly"],
+        answer: "Last"
+      },
+      {
+        question: "The guards offer you a mysterious game during recruitment. You:",
+        options: ["Say yes for fun", "Ask questions", "Decline politely", "Say yes and observe closely"],
+        answer: "Say yes and observe closely"
+      },
+      {
+        question: "You’re running low on food, what’s your strategy?",
+        options: ["Start a fight for extra food", "Steal from someone weaker", "Stay quiet and observe", "Beg the guards for more"],
+        answer: "Stay quiet and observe"
+      },
+      {
+        question: "Lights go off at night in the dorm. You:",
+        options: ["Sleep peacefully", "Stay hidden and alert", "Start a fight to prove yourself", "Ask others to protect you"],
+        answer: "Stay hidden and alert"
+      },
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startQuiz() {
+      document.getElementById('startBtn').style.display = 'none';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById('questionText').innerText = q.question;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      document.getElementById('result').innerText = '';
+      document.getElementById('nextBtn').style.display = 'none';
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(btn, option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = quizData[currentQuestion].answer;
+      const result = document.getElementById('result');
+      const allOptions = document.getElementsByClassName('option');
+
+      if (selected === correct) {
+        score++;
+        result.innerText = '✅ Correct!';
+        button.classList.add('correct');
+      } else {
+        result.innerText = `❌ Wrong! Correct answer: ${correct}`;
+      }
+
+      document.getElementById('nextBtn').style.display = 'inline-block';
+      Array.from(allOptions).forEach(btn => btn.disabled = true);
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showFinalResult();
+      }
+    }
+
+    function showFinalResult() {
+      document.getElementById('quiz').innerHTML = `<h2>You scored ${score} out of ${quizData.length}!</h2>`;
+    }
+  </script>
+</body>
+</html>

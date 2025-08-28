@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    .quiz-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px #af0000;
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .option {
+      background-color: #444;
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #a50000;
+    }
+    .option.correct {
+      background-color: green !important;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+    #nextBtn, #startBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 150px;
+    }
+    #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🧠 Quiz</h1>
+    <div id="quiz">
+      <div class="question" id="questionText">Click below to start the quiz!</div>
+      <div id="options"></div>
+      <div id="result"></div>
+      <button id="startBtn" onclick="startQuiz()" class="btn2">Start Quiz</button>
+      <button id="nextBtn" onclick="nextQuestion()" class="btn2">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "What is the first game played in Squid Game?",
+        options: ["Tug of War", "Marbles", "Red Light, Green Light", "Squid Game"],
+        answer: "Red Light, Green Light"
+      },
+      {
+        question: "What number is the main character, Seong Gi-hun?",
+        options: ["456", "001", "212", "218"],
+        answer: "456"
+      },
+      {
+        question: "What color are the guard uniforms?",
+        options: ["Blue", "Pink", "Black", "Green"],
+        answer: "Pink"
+      },
+      {
+        question: "What shape is not found on the guards' masks?",
+        options: ["Circle", "Square", "Triangle", "Star"],
+        answer: "Star"
+      },
+      {
+        question: "What is the last game played in the series?",
+        options: ["Glass Bridge", "Marbles", "Squid Game", "Red Light, Green Light"],
+        answer: "Squid Game"
+      },
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startQuiz() {
+      document.getElementById('startBtn').style.display = 'none';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById('questionText').innerText = q.question;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      document.getElementById('result').innerText = '';
+      document.getElementById('nextBtn').style.display = 'none';
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(btn, option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = quizData[currentQuestion].answer;
+      const result = document.getElementById('result');
+      const allOptions = document.getElementsByClassName('option');
+
+      if (selected === correct) {
+        score++;
+        result.innerText = '✅ Correct!';
+        button.classList.add('correct');
+      } else {
+        result.innerText = `❌ Wrong! Correct answer: ${correct}`;
+      }
+
+      document.getElementById('nextBtn').style.display = 'inline-block';
+      Array.from(allOptions).forEach(btn => btn.disabled = true);
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showFinalResult();
+      }
+    }
+
+    function showFinalResult() {
+      document.getElementById('quiz').innerHTML = `<h2>You scored ${score} out of ${quizData.length}!</h2>`;
+    }
+  </script>
+</body>
+</html>

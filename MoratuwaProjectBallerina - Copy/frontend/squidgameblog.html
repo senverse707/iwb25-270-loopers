@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Squid Game Characters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style1.css">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+ 
+</head>
+<body>
+
+  <header>
+    
+  <div class="header-container">
+  <h1 class="title">UNMASKING SQUID GAME: A DEEP DIVE INTO ITS MOST ICONIC CHARACTERS</h1>
+  
+  </div>
+
+  </header>
+<div class="search-container">
+  <div class="search-box">
+  <input type="text" id="searchInput" placeholder="Search a character..." />
+      
+  </div>
+</div>
+
+  <div id="posts">
+    
+    <div class="post" data-title="kang sae-byeok">
+      <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/067.html" class="character">Kang Sae-byeok<br> (Player 067)</a></h2>
+      <img src="images/Kang_Sae-byeok.png" alt="Kang Sae-byeok">
+      <p>North Korean defector, fierce and loyal, seeking to reunite her family.</p>
+    </div>
+
+    <div class="post" data-title="seong gi-hun">
+    <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/456.html" class="character">Seong Gi-hun<br> (Player 456)</a></h2>
+      <img src="images/Seong_Gi-hun.jpg" alt="Seong Gi-hun">
+      <p>Struggling father and gambler, the main protagonist who evolves morally.</p>
+    </div>
+
+    <div class="post" data-title="cho sang-woo">
+      <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/218.html" class="character">Cho Sang-woo<br> (Player 218)</a></h2>
+      <img src="images/cho_sang_woo.jpg" alt="Cho Sang-woo">
+      <p>Gifted student turned fallen businessman, known for his strategic mind and moral downfall.</p>
+    </div>
+
+    <div class="post" data-title="abdul ali">
+      <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/199.html" class="character" >Abdul Ali<br>(Player 199)</a></h2>
+      <img src="images/abdul_ali.jpg" alt="Abdul Ali">
+      <p>A kind migrant worker from Pakistan, known for his honesty and loyalty in the games.</p>
+    </div>
+
+    <div class="post" data-title="oh il-nam">
+      <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/001.html" class="character" >Oh Il-nam<br>(Player 001)</a></h2>
+      <img src="images/oh-il-nam.jpg" alt="Oh Il-nam">
+      <p>An elderly man with a hidden agenda, his presence plays a key twist in the plot.</p>
+    </div>
+
+    <div class="post" data-title="hwang jun-ho">
+      <div class="label">SQUID GAME CHARACTER</div>
+      <h2><a href="templates/characters/detective.html" class="character" >Hwang Jun-ho<br> (Detective)</a></h2>
+      <img src="images/hwang-jung-ho.png" alt="Hwang Jun-ho">
+      <p>A determined police officer who infiltrates the game facility to find his brother.</p>
+    </div>
+  </div>
+  <a href="index.html" class="blog-button">Back to Home</a>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const posts = document.querySelectorAll('.post');
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      posts.forEach(post => {
+        post.style.display = post.dataset.title.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>Squid Game</h2>
+        <p>Step into the ultimate survival game where strategy meets suspense.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#game">Games</a></li>
+          <li><a href="templates/squid-game-blog.html">Blog</a></li>
+          <li><a href="#quizsec">Quizzes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Seoul, South Korea</li>
+          <li><i class="fas fa-envelope"></i> contact@squidgame.com</li>
+          <li><i class="fas fa-phone-alt"></i> +777 584 9547</li>
+        </ul>
+      </div>
+
+      <div class="footer-socials">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Squid Game Fan Page. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

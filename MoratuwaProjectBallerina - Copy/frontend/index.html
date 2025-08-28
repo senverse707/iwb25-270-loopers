@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Squid Game Home</title>
+  <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  
+  <div id="main">
+    <nav class="navbar navbar-expand-lg customnav" style="background-color: #16161607 !important" data-bs-theme="dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav navli">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="squidgameblog.html">Characters</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#quizsec" role="button">Quizzes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#game">Games</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#quiz">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#aboutus">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#footer">Contact Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Login.html">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home" class="section">
+      <div class="sec1">
+        <div class="sub1">
+          <img class="heroimg" src="images/shining.png" alt="Shining Image" width="400" height="360" />
+        </div>
+        <div class="sub2">
+          <h1 id="head2"></h1>
+          <p>
+            Step into the gripping universe where desperation meetsdeadly
+            competition. From childhood games turned sinister to masked guards
+            and secretive masterminds, Squid Game takes survival to a whole new
+            level. Dive into character stories, game breakdowns, hidden symbols,
+            and all the twists that kept us on the edge of our seats.
+
+          </p>
+          <p class="p2">Are you ready to play?</p>
+          <br />
+          <a href="#game"><button class="btn2 play">Play Now</button></a>
+        </div>
+      </div>
+    </section>
+    <br>
+    <section id="quiz" class="section2">
+      <h1 class="head2">From Red Light to Revelations: Squid Game Blog</h2>
+        <div class="sec4">
+          <div class="sec2">
+            <img src="images/image20.webp" alt="pics" class="img1" />
+            <div class="sec3">
+              <h5>Behind the Masks: The Truth About the Guards</h5>
+              <p>
+                Ever wondered who the red-suited guards are under those eerie masks? These silent enforcers of the Squid
+                Game have their own
+                untold story — from strict hierarchies to secret identities. Dive into the chilling reality behind the
+                black shapes on their
+                masks. <br>
+
+                <a href="blog.html#guards" style="text-decoration: none;">Read More →</a>
+              </p>
+            </div>
+          </div>
+          <div class="sec2">
+            <img src="images/tug.avif" alt="pics" class="img1" />
+            <div class="sec3">
+              <h5>The Games We Played: From Playground to Deathground</h5>
+              <p>
+                Childhood games like Red Light, Green Light and Tug of War were once innocent fun. In Squid Game, they
+                turn deadly. Discover the
+                history and symbolism of each game — and how they reflect deep themes of survival and society. <br>
+                <a href="blog.html#players" style="text-decoration: none;">Read More →</a>
+              </p>
+            </div>
+          </div>
+          <div class="sec2">
+            <img src="images/456.webp" alt="pics" class="img1" />
+            <div class="sec3">
+              <h5>Player 456: Why Gi-hun Became the Face of Rebellion</h5>
+              <p>
+                From broke and broken to bold and brave, Seong Gi-hun’s journey is more than a survival story. It’s a
+                transformation that questions
+                morality, humanity, and hope in a world gone cold. What made him go back at the end? <br>
+                <a href="blog.html#gi-hun" style="text-decoration: none;">Read More →</a>
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+    <div class="containersort">
+     
+      <div class="sorting-stats">
+        <div class="title-banner">SORTED TODAY</div>
+        <div class="roles">
+          <div class="role">
+            <div class="icon">🎮</div>
+            <div class="name">Player</div>
+            <div class="percent" id="playerPercent">0%</div>
+          </div>
+          <div class="role">
+            <div class="icon">🎭</div>
+            <div class="name">Masked Guard</div>
+            <div class="percent" id="maskedPercent">0%</div>
+          </div>
+          <div class="role">
+            <div class="icon">🕶️</div>
+            <div class="name">Front Man</div>
+            <div class="percent" id="frontmanPercent">0%</div>
+          </div>
+          <div class="role">
+            <div class="icon">👑</div>
+            <div class="name">VIP</div>
+            <div class="percent" id="vipPercent">0%</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="main-content">
+        <h1>Get Sorted Into Your Survival Role</h1>
+        <p>Take the quiz and find out if you're a player, a guard, or the mastermind.</p>
+        <button id="startBtn" class="btn2 sortbtn">Get Sorted Now</button>
+      </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay">
+      <div id="quizModal">
+        <button class="closeBtn" title="Close Quiz">&times;</button>
+        <div id="quizContainer">
+          <div class="question" id="questionText"></div>
+          <div class="answers" id="answersContainer"></div>
+        </div>
+        <div id="resultContainer" style="display:none;">
+          <h2>Your Role: <span id="userRole"></span></h2>
+          <p>Here’s how all users got sorted so far:</p>
+          <div id="percentageChart"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="gamecont" id="game">
+      <br><br>
+      <h1>Enter the Arena: Play the Deadly Games</h1>
+      <div class="gamebox">
+        <a href="templates/games/tugofwar.html" class="gamelink">
+          <div class="games">
+            <img src="images/tugofwar.avif" alt="games" class="gamesimg">
+            <div class="gametxt">
+              <h6>Tug of War</h6>
+              <p>Strength is nothing without strategy.</p>
+            </div>
+          </div>
+        </a>
+        <a href="templates/games/marbelgame.html" class="gamelink">
+          <div class="games">
+            <img src="images/marblegame.jpg" alt="games" class="gamesimg">
+            <div class="gametxt">
+              <h6>Marble Duel</h6>
+              <p>One game. One chance. Guess wisely.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="templates/games/galssbridge.html" class="gamelink">
+          <div class="games">
+            <img src="images/glassstep.jpg" alt="games" class="gamesimg">
+            <div class="gametxt">
+              <h6>Glass Bridge Escape</h6>
+              <p>Pick the right path — or fall into the abyss.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="templates/games/redlight.html" class="gamelink">
+          <div class="games">
+            <img src="images/redgreen.jpg" alt="games" class="gamesimg">
+            <div class="gametxt">
+              <h6>Red Light, Green Light</h6>
+              <p>Move only when it's safe. One wrong step… and you're out.</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="templates/games/dalgona.html" class="gamelink">
+          <div class="games">
+            <img src="images/dalgona.jpg" alt="games" class="gamesimg">
+            <div class="gametxt">
+              <h6>Dalgona Drawing Challenge</h6>
+              <p>Pick the right path — or fall into the abyss.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div><br>
+  <div class="pollcont">
+    <div class="polling animate-left">
+      <img src="images/guard.png" class="pollimage" alt="squid game" width="600px" height="600px">
+    </div>
+    <section id="pollSection" class="poll-container">
+      <h2 class="poll-title">Are You Excited for Squid Game Season 3?</h2>
+      <div class="poll-options">
+        <button class="poll-btn" data-choice="yes">✅ Yes, can’t wait!</button>
+        <button class="poll-btn" data-choice="maybe">🤔 Maybe, let’s see</button>
+        <button class="poll-btn" data-choice="no">❌ Not really</button>
+      </div>
+      <div id="pollResults" class="poll-results" style="display: none;">
+        <div class="poll-bar">
+          <div class="poll-label">✅ Yes</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="yesBar"></div>
+          </div>
+          <span id="yesPercent">0%</span>
+        </div>
+        <div class="poll-bar">
+          <div class="poll-label">🤔 Maybe</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="maybeBar"></div>
+          </div>
+          <span id="maybePercent">0%</span>
+        </div>
+        <div class="poll-bar">
+          <div class="poll-label">❌ No</div>
+          <div class="bar-track">
+            <div class="bar-fill" id="noBar"></div>
+          </div>
+          <span id="noPercent">0%</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+  <div class="quizcont" id="quizsec">
+    <br><br><br>
+    <h1>Only True Fans Will Survive This Quiz</h1>
+    <div class="container4">
+      <a href="quiz.html" class="gamelink">
+        <div class="sec5">
+          <img src="images/img13.jpeg" alt="image" class="imgquiz">
+          <div class="quiztext">
+            <h5>How Much Do You Know About Squid Game?</h5>
+            <p>Trivia-based quiz for fans of the show.</p>
+            <p class="p1">Level <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow"
+                class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg> | 5 Questions
+            </p>
+          </div>
+        </div>
+      </a>
+      <a href="quiz2.html" class="gamelink">
+        <div class="sec5">
+          <img src="images/front.jpg" alt="image" class="imgquiz">
+          <div class="quiztext">
+            <h5>Would You Survive the Squid Game?</h5>
+            <p>Decision-making quiz that simulates being in the game.</p>
+            <p class="p1">Level <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow"
+                class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow" class="bi bi-star-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg> | 8 Questions
+            </p>
+          </div>
+        </div>
+      </a>
+      <a href="newquiz.html" class="gamelink">
+        <div class="sec5">
+          <img src="images/quizimg.jpg" alt="image" class="imgquiz">
+          <div class="quiztext">
+            <h5>Can You Outsmart the Front Man?</h5>
+            <p>A logic/puzzle-style quiz where users solve riddles or game strategies.</p>
+            <p class="p1">Level <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow"
+                class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow" class="bi bi-star-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="Yellow" class="bi bi-star-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+              </svg> | 10 Questions
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <section class="section5 " id="aboutus">
+    <br><br>
+    <div class="text-box slide-in-right">
+      <h1>About Us</h1>
+      <p>
+        Welcome to the digital playground where fear meets fascination. We're a team of creatives and developers
+        inspired
+        by the psychological thrill of <strong>Squid Game</strong>. Our mission? To craft an online experience that
+        mirrors the suspense, intensity, and dark beauty of the game itself. Every detail — from the eerie ambiance to
+        the symbolic visuals — is designed to pull you into a world where survival isn’t just a choice, it’s a
+        challenge.
+      </p>
+    </div>
+    <div class="image-box slide-in-left">
+      <img src="images/aboutusimg2.jpg" alt="Squid Game Visual" />
+    </div>
+  </section>
+  <section class="section6">
+    <div class="image-box slide-in-right">
+      <img src="images/aboutusimg.jpg" alt="Squid Game Mission" />
+    </div>
+    <div class="text-box slide-in-left">
+      <h1>Our Mission</h1>
+      <p>
+        We exist to blur the boundary between fiction and reality. Through cinematic visuals and interactive design, our
+        mission is to immerse you in a digital realm where choices matter and aesthetics provoke thought. Inspired by
+        <strong>Squid Game’s</strong> raw intensity, we aim to trigger your curiosity, spark your adrenaline, and leave
+        you wondering — would you survive?
+      </p>
+    </div>
+  </section>
+  </div>
+
+  <button class="scrollToTopBtn" id="scrollToTopBtn" title="Back to top">
+    ↑
+    <svg width="60" height="60">
+      <circle r="28" cx="30" cy="30" stroke="#000" stroke-width="4" fill="none" opacity="0.1"></circle>
+      <circle id="progressCircle" r="28" cx="30" cy="30" stroke="#fff" stroke-width="4" fill="none"
+        stroke-dasharray="176" stroke-dashoffset="176"></circle>
+    </svg>
+  </button>
+
+  <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/script.js"></script>
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <h2>Squid Game</h2>
+        <p>Step into the ultimate survival game where strategy meets suspense.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#game">Games</a></li>
+          <li><a href="#quiz">Blog</a></li>
+          <li><a href="#quizsec">Quizzes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Seoul, South Korea</li>
+          <li><i class="fas fa-envelope"></i> contact@squidgame.com</li>
+          <li><i class="fas fa-phone-alt"></i> +777 584 9547</li>
+        </ul>
+      </div>
+
+      <div class="footer-socials">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Squid Game Fan Page. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

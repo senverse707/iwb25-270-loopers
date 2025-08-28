@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz</title>
+<link rel="stylesheet" href="styles/style.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+    }
+    .quiz-container {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px #af0000;
+    }
+    .question {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .option {
+      background-color: #444;
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #a50000;
+    }
+    .option.correct {
+      background-color: green !important;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #ffffff;
+    }
+    #nextBtn, #startBtn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 150px;
+    }
+    #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>🧠 Quiz</h1>
+    <div id="quiz">
+      <div class="question" id="questionText">Click below to start the quiz!</div>
+      <div id="options"></div>
+      <div id="result"></div>
+      <button id="startBtn" onclick="startQuiz()" class="btn2">Start Quiz</button>
+      <button id="nextBtn" onclick="nextQuestion()" class="btn2">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        question: "The Front Man is watching. What’s your best strategy?",
+        options: ["Stay out of conflicts and play smart", "Form a big group and dominate others", "Get attention by winning early", "Try to sneak out of the facility"],
+        answer: "Stay out of conflicts and play smart"
+      },
+      {
+        question: "You find a hidden camera in the dorm. What do you do?",
+        options: ["Destroy it", "Ignore it", "Pretend you didn’t see it", "Show it to everyone"],
+        answer: "Pretend you didn’t see it"
+      },
+      {
+        question: "You’re offered VIP privileges in secret. What’s your move?",
+        options: ["Accept to gather intel", "Refuse and report it", "Brag to others", "Immediately confront the Front Man"],
+        answer: "Accept to gather intel"
+      },
+      {
+        question: "You discover the medical black market scheme. How do you act?",
+        options: ["Join it to escape", "Report it to the guards", "Use it as leverage to survive", "Warn the other players"],
+        answer: "Use it as leverage to survive"
+      },
+      {
+        question: "A guard drops a key card. What’s the most strategic action?",
+        options: ["Give it back", "Hide it for later use", "Run with it immediately", "Show it to other players"],
+        answer: "Hide it for later use"
+      },
+      {
+        question: "You suspect someone is spying for the Front Man. What do you do?",
+        options: ["Get closer to them to learn more", "Tell everyone", "Threaten them", "Avoid them completely"],
+        answer: "Get closer to them to learn more"
+      },
+      {
+        question: "During the break between games, how do you act?",
+        options: ["Try to sleep through it", "Pretend to be weak", "Study the environment and behavior of others", "Ask guards for hints"],
+        answer: "Study the environment and behavior of others"
+      },
+      {
+        question: "You’re given a chance to talk with the Front Man alone. You:",
+        options: ["Demand answers", "Stay silent", "Compliment his strategy", "Speak carefully and ask indirect questions"],
+        answer: "Speak carefully and ask indirect questions"
+      },
+      {
+        question: "You find the records room. What do you search for?",
+        options: ["Your own file", "The Front Man’s identity", "The winner history", "Guard patrol patterns"],
+        answer: "The winner history"
+      },
+      {
+        question: "The final test: The Front Man offers you a deal to join his team. Do you:",
+        options: ["Say no and risk death", "Pretend to accept to survive", "Accept fully and turn ruthless", "Reveal it to the others"],
+        answer: "Pretend to accept to survive"
+      },
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function startQuiz() {
+      document.getElementById('startBtn').style.display = 'none';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById('questionText').innerText = q.question;
+      const optionsDiv = document.getElementById('options');
+      optionsDiv.innerHTML = '';
+      document.getElementById('result').innerText = '';
+      document.getElementById('nextBtn').style.display = 'none';
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.innerText = option;
+        btn.onclick = () => checkAnswer(btn, option);
+        optionsDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(button, selected) {
+      const correct = quizData[currentQuestion].answer;
+      const result = document.getElementById('result');
+      const allOptions = document.getElementsByClassName('option');
+
+      if (selected === correct) {
+        score++;
+        result.innerText = '✅ Correct!';
+        button.classList.add('correct');
+      } else {
+        result.innerText = `❌ Wrong! Correct answer: ${correct}`;
+      }
+
+      document.getElementById('nextBtn').style.display = 'inline-block';
+      Array.from(allOptions).forEach(btn => btn.disabled = true);
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showFinalResult();
+      }
+    }
+
+    function showFinalResult() {
+      document.getElementById('quiz').innerHTML = `<h2>You scored ${score} out of ${quizData.length}!</h2>`;
+    }
+  </script>
+</body>
+</html>

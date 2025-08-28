@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Squid Game: Glass Bridge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="../../styles/galssbridge.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+
+</head>
+
+<body>
+    <div class="squid-background">
+        <div class="container">
+            <!-- Header -->
+            <header>
+                <h1 class="title">❆ GLASS BRIDGE ❆</h1>
+                <div class="game-info">
+                    <div class="steps">STEPS: <span id="step-counter">0</span>/8</div>
+                    <div class="timer">TIME: <span id="time">00:00</span></div>
+                </div>
+            </header>
+
+            <!-- Main Game Area -->
+            <main>
+                <div class="bridge-container">
+                    <div id="bridge" class="bridge"></div>
+                </div>
+
+                <!-- Difficulty Selector -->
+                <div class="difficulty">
+                    <button class="difficulty-btn active" data-difficulty="easy">EASY</button>
+                    <button class="difficulty-btn" data-difficulty="medium">MEDIUM</button>
+                    <button class="difficulty-btn" data-difficulty="hard">HARD</button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div id="progress-bar" class="progress-bar"></div>
+
+                </div>
+
+                <!-- Controls -->
+                <div class="controls">
+                    <button id="restart" class="btn-pink">↻ RESTART</button>
+                    <button id="rules" class="btn-pink">❓ RULES</button>
+                    <button id="hint-btn" class="btn-pink">💡 Hint</button>
+                    <button id="cheat-btn" class="btn-pink" onclick="cheatMode()">👁️ Cheat Mode</button>
+                    <!-- <a href="index.html#main"><button class="btn-pink">Home</button></a> -->
+
+                </div>
+            </main>
+
+            <!-- Leaderboard (Right Side) -->
+            <aside class="leaderboard">
+                <h2>🏆 TOP PLAYERS</h2>
+                <ol id="leaderboard"></ol>
+                <div class="player-stats">
+                    <h3>YOUR STATS</h3>
+                    <p>Games Played: <span id="games-played">0</span></p>
+                    <!-- <p>Best Score: <span id="best-score">0</span> Steps</p> -->
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Sound Toggle Button -->
+    <button id="sound-toggle" class="btn-sound btn-pink">🔊 SOUND ON</button>
+
+    <!-- Audio Elements -->
+    <audio id="break-sound" src="../../Audio/break.mpeg" preload="auto"></audio>
+    <audio id="step-sound" src="../../Audio/step.mpeg" preload="auto"></audio>
+    <audio id="win-sound" src="../../Audio/win.mpeg" preload="auto"></audio>
+    <audio id="lose-sound" src="../../Audio/laugh.mpeg" preload="auto"></audio>
+
+    <script src="../../js/galssbridge.js"></script>
+    <div id="glass-break-particles"></div>
+    
+</body>
+
+</html>

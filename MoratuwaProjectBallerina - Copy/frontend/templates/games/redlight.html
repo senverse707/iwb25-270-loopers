@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Red Light Green Light</title>
+
+ <link rel="stylesheet" href="../../styles/style.css" />
+<link rel="stylesheet" href="../../styles/redlight.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+</head>
+<body>
+  
+  <div class="container">
+    
+    <div class="game-area">
+      <h1 class="title">❆ RED LIGHT,GREEN LIGHT ❆</h1>
+      <div class="info-bar">
+        <div class="light" id="light">🔴 Red Light</div>
+        <div id="timer">⏱️ Time: 0.00s</div>
+      </div>
+
+      <div class="track">
+        <div id="player"></div>
+        <div class="finish-line">🏁</div>
+      </div>
+
+      <div class="buttons">
+        <button  id = "moveBtn" onclick="movePlayer()">▶ Move Forward</button>
+        <button onclick="resetGame()">🔁 Reset Game</button>
+         <button onclick="clearAll()">🗑️ clear All</button>
+      </div>
+
+      <div id="message"></div>
+    </div>
+
+    <div class="leaderboard-area">
+      <h2>🏆 Leaderboard</h2>
+      <ol id="leaderboard"></ol>
+    </div>
+  </div>
+
+  <div class="buttons">
+   
+
+  </div>
+
+  <!-- Sound Effects -->
+  <audio id="sound-green" src="../../Audio/greenlight.mpeg" preload="auto"></audio>
+  <audio id="sound-red" src="../../Audio/redlight.mpeg" preload="auto"></audio>
+  <audio id="sound-win" src="../../Audio/win.mpeg" preload="auto"></audio>
+  <audio id="sound-lose" src="../../Audio/gun.mpeg" preload="auto"></audio>
+
+
+  <script src="../../js/redlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

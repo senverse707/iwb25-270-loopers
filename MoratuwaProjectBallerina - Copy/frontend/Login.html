@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="styles/style.css" />
+</head>
+<body>
+  <!-- Loading animation container -->
+  <div id="intro">
+    <h1 id="head1">Squid Game</h1>
+    <div class="load">
+      <div class="loader">
+        <svg viewBox="0 0 80 80">
+          <circle r="32" cy="40" cx="40" id="test"></circle>
+        </svg>
+      </div>
+      <div class="loader triangle">
+        <svg viewBox="0 0 86 80">
+          <polygon points="43 8 79 72 7 72"></polygon>
+        </svg>
+      </div>
+      <div class="loader">
+        <svg viewBox="0 0 80 80">
+          <rect height="64" width="64" y="8" x="8"></rect>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login / Signup Container -->
+  <div class="container" id="container">
+    <!-- Sign Up Form -->
+    <div class="form-container sign-up-container">
+      <form action="#" id="signupForm">
+        <h1 id="head3">Create Account</h1>
+        <input type="text" placeholder="Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="btn1" type="submit">Sign Up</button>
+      </form>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container sign-in-container">
+      <form action="#" id="loginForm">
+        <h1 id="head3">Login</h1>
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password" required />
+        <button class="btn1" type="submit">Login</button>
+      </form>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1 id="head3">Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1 id="head3">Welcome!</h1>
+          <p>Enter your personal details and start your journey with us</p>
+          <button class="ghost" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="styles/bootstrap/.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+
+  <script>
+// API Base URL
+const API_BASE = 'http://localhost:8080';
+
+// Current user data
+let currentUser = null;
+
+// Connection status
+let isServerConnected = false;
+
+// User authentication state
+let isUserAuthenticated = false;
+
+// Storage functions (using variables for compatibility)
+let storedUserData = null;
+
+function getStoredUserData() {
+    return storedUserData;
+}
+
+function setStoredUserData(data) {
+    storedUserData = data;
+}
+
+function clearStoredUserData() {
+    storedUserData = null;
+}
+
+// DOM Elements
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+const intro = document.getElementById('intro');
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+
+// Initialize the app
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        if (intro) intro.style.display = 'none';
+        if (container) container.style.display = 'block';
+    }, 3000);
+    initializeApp();
+});
+
+// Initialize application
+async function initializeApp() {
+    await checkServerConnection();
+    checkStoredUserData();
+}
+
+function checkStoredUserData() {
+    const userData = getStoredUserData();
+    if (userData) {
+        try {
+            const user = JSON.parse(userData);
+            console.log('Found stored user data for:', user.username);
+            showSuccessMessage(`Found previous session for ${user.username}. Please login to continue.`);
+            const loginEmailField = loginForm?.querySelector('input[type="email"]');
+            if (loginEmailField) loginEmailField.value = user.email;
+        } catch (e) {
+            console.error('Invalid user data in storage', e);
+            clearStoredUserData();
+        }
+    }
+}
+
+if (signUpButton) {
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+}
+
+if (signInButton) {
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+}
+
+// Check server connection
+async function checkServerConnection() {
+    try {
+        const response = await fetch(`${API_BASE}/health`, { method: 'GET', timeout: 5000 });
+        if (response.ok) {
+            isServerConnected = true;
+            console.log('✅ Server Connected');
+            hideServerErrorMessage();
+        } else {
+            throw new Error('Server responded with error');
+        }
+    } catch (error) {
+        console.error('❌ Server connection failed:', error);
+        isServerConnected = false;
+        showServerErrorMessage();
+    }
+}
+
+function showServerErrorMessage() {
+    if (!isUserAuthenticated) {
+        showErrorMessage('Cannot connect to server. Please make sure the backend server is running on http://localhost:8080');
+    }
+}
+
+function hideServerErrorMessage() {
+    console.log('Server connection restored');
+}
+
+async function makeRequest(url, options = {}) {
+    if (!isServerConnected) {
+        await checkServerConnection();
+        if (!isServerConnected) throw new Error('Server is not available. Please check your backend connection.');
+    }
+    const defaultHeaders = { 'Content-Type': 'application/json', 'Accept': 'application/json' };
+    const config = { ...options, headers: { ...defaultHeaders, ...(options.headers || {}) } };
+    try {
+        const response = await fetch(url, config);
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            const data = await response.json();
+            return { response, data };
+        } else {
+            const text = await response.text();
+            return { response, data: { message: text } };
+        }
+    } catch (error) {
+        console.error('Request failed:', error);
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            isServerConnected = false;
+            throw new Error('Network error: Cannot connect to server. Please check if the backend is running.');
+        }
+        throw error;
+    }
+}
+
+function showSuccessMessage(message) {
+    showMessage(message, 'success');
+}
+
+function showErrorMessage(message) {
+    showMessage(message, 'error');
+}
+
+function showMessage(message, type = 'success') {
+    const alertDiv = document.createElement('div');
+    const styles = {
+        success: { backgroundColor: '#d4edda', color: '#155724', borderColor: '#c3e6cb' },
+        error: { backgroundColor: '#f8d7da', color: '#721c24', borderColor: '#f5c6cb' }
+    };
+    const style = styles[type] || styles.success;
+    alertDiv.style.cssText = `
+        position: fixed; top: 20px; right: 20px;
+        background-color: ${style.backgroundColor}; color: ${style.color};
+        padding: 15px 20px; border: 1px solid ${style.borderColor};
+        border-radius: 5px; z-index: 9999; font-family: Arial, sans-serif;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 300px; word-wrap: break-word;
+    `;
+    alertDiv.textContent = message;
+    document.body.appendChild(alertDiv);
+    setTimeout(() => { if (alertDiv.parentNode) alertDiv.remove(); }, 5000);
+}
+
+function setLoading(button, loading = true) {
+    if (!button) return;
+    if (loading) {
+        button.disabled = true;
+        button.style.opacity = '0.6';
+        button.style.cursor = 'not-allowed';
+        button.innerHTML = '<i class="bi bi-hourglass-split"></i> Loading...';
+    } else {
+        button.disabled = false;
+        button.style.opacity = '1';
+        button.style.cursor = 'pointer';
+    }
+}
+
+// Handle user registration
+async function handleRegister(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    const username = form.querySelector('input[type="text"]').value;
+    const email = form.querySelector('input[type="email"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    setLoading(submitButton, true);
+    try {
+        console.log('Attempting to register user:', { username, email });
+        const { response, data } = await makeRequest(`${API_BASE}/users`, {
+            method: 'POST',
+            body: JSON.stringify({
+                UserName: username,
+                Email: email,
+                Passwrod: password  // keeping typo if backend expects it
+            })
+        });
+        console.log('Registration response status:', response.status, data);
+        if (response.ok) {
+            showSuccessMessage('Registration successful! Please login with your credentials.');
+            container.classList.remove("right-panel-active");
+            const loginEmailField = loginForm.querySelector('input[type="email"]');
+            if (loginEmailField) loginEmailField.value = email;
+            form.reset();
+        } else {
+            showErrorMessage(data.message || 'Registration failed. Please try again.');
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        showErrorMessage(error.message || 'Network error. Please check your connection and try again.');
+    } finally {
+        submitButton.innerHTML = originalButtonText;
+        setLoading(submitButton, false);
+    }
+}
+
+// Handle user login
+async function handleLogin(event) {
+    event.preventDefault();
+    const form = event.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    const email = form.querySelector('input[type="email"]').value;
+    const password = form.querySelector('input[type="password"]').value;
+    setLoading(submitButton, true);
+
+    try {
+        console.log('Attempting to login user:', email);
+        const { response, data } = await makeRequest(`${API_BASE}/login`, {
+            method: 'POST',
+            body: JSON.stringify({
+                Email: email,
+                Passwrod: password  // keeping typo if backend expects it
+            })
+        });
+
+        console.log('Login response status:', response.status, data);
+
+        //  FIX: only succeed if backend confirms success
+        if (response.ok && (data.success === true || data.username)) {
+            console.log('✅ Login successful, setting authentication state');
+            currentUser = {
+                id: data.id,
+                username: data.username,
+                email: data.email,
+                loginTime: new Date().toLocaleString()
+            };
+            isUserAuthenticated = true;
+            setStoredUserData(JSON.stringify(currentUser));
+            showSuccessMessage(`Login successful! Welcome ${data.username}!`);
+            form.reset();
+            setTimeout(() => { showUserDashboard(); }, 2000);
+        } else {
+            showErrorMessage(data.message || 'Login failed. Please check your credentials.');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showErrorMessage(error.message || 'Network error. Please check your connection and try again.');
+    } finally {
+        submitButton.innerHTML = originalButtonText;
+        setLoading(submitButton, false);
+    }
+}
+
+// Show user dashboard
+function showUserDashboard() {
+    if (!currentUser || !isUserAuthenticated || !currentUser.id) {
+        console.error('❌ Cannot show dashboard - missing authentication');
+        return;
+    }
+    const existingDashboard = document.querySelector('[data-dashboard="true"]');
+    if (existingDashboard) return;
+    const dashboard = document.createElement('div');
+    dashboard.setAttribute('data-dashboard', 'true');
+    dashboard.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.9); color: white;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        z-index: 10000; font-family: Arial, sans-serif;
+    `;
+    dashboard.innerHTML = `
+        <div style="text-align: center; max-width: 500px; padding: 20px;">
+            <h1 style="color: #ff6b35; margin-bottom: 20px;">🦑 Welcome to Squid Game!</h1>
+            <div style="background-color: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                <h2>Player Information</h2>
+                <p><strong>Username:</strong> ${currentUser.username}</p>
+                <p><strong>Email:</strong> ${currentUser.email}</p>
+                <p><strong>Player ID:</strong> #${currentUser.id}</p>
+                <p><strong>Login Time:</strong> ${currentUser.loginTime}</p>
+                <p><strong>Status:</strong> <span style="color: #4CAF50;">✅ Authenticated</span></p>
+            </div>
+            <button onclick="logout()" style="background-color: #ff6b35; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-right: 10px;">Logout</button>
+            <button onclick="hideDashboard()" style="background-color: #666; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">Hide Dashboard</button>
+        </div>
+    `;
+    document.body.appendChild(dashboard);
+}
+
+function hideDashboard() {
+    const dashboard = document.querySelector('[data-dashboard="true"]');
+    if (dashboard) dashboard.remove();
+}
+
+function logout() {
+    clearStoredUserData();
+    currentUser = null;
+    isUserAuthenticated = false;
+    const dashboard = document.querySelector('[data-dashboard="true"]');
+    if (dashboard) dashboard.remove();
+    if (loginForm) loginForm.reset();
+    if (signupForm) signupForm.reset();
+    container.classList.remove("right-panel-active");
+    showSuccessMessage('Logged out successfully!');
+}
+
+if (loginForm) loginForm.addEventListener('submit', handleLogin);
+if (signupForm) signupForm.addEventListener('submit', handleRegister);
+
+setInterval(() => { checkServerConnection(); }, 30000);
+
+window.logout = logout;
+window.hideDashboard = hideDashboard;
+window.checkAuthStatus = function() {
+    console.log('🔍 Authentication Status Check:', {
+        isUserAuthenticated, currentUser, isServerConnected, hasStoredData: !!storedUserData,
+        dashboardVisible: !!document.querySelector('[data-dashboard="true"]')
+    });
+};
+  </script>
+</body>
+</html>

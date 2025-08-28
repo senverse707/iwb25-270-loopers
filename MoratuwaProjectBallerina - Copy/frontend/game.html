@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Squid Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  height: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+}
+.intro {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOut 3s forwards;
+  animation-delay: 2s;
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.logo {
+  font-size: 4rem;
+  animation: zoomIn 2s;
+}
+@keyframes zoomIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  transition: opacity 1s;
+}
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.form-box {
+  background: #1a1a1a;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+button {
+  padding: 10px 20px;
+  background: #e60039;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+  <div class="intro" id="intro">
+    <h1 class="logo">🦑 SQUID GAME</h1>
+  </div>
+
+  <div class="auth-container hidden" id="authContainer">
+    <!-- login/signup overlap layout -->
+    <div class="form-box">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <button>Login</button>
+      <p>Don't have an account? <span class="signup-link">Sign up</span></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    window.onload = () => {
+  setTimeout(() => {
+    document.getElementById('authContainer').classList.remove('hidden');
+    document.getElementById('authContainer').classList.add('show');
+  }, 3000); // After 3 seconds, show login/signup
+};
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Squid Game - Marbles</title>
+   <link rel="stylesheet" href="../../styles/style.css" />
+  <link rel="stylesheet" href="../../styles/marblegame.css">
+</head>
+<body>
+  <div class="marblemain">
+    <div class="game-container">
+      <h1>🎱 Squid Game - Marbles 🎱</h1>
+      <p id="status">Guess if opponent’s marbles are Odd or Even.</p>
+    
+      <div id="scores">
+        <span class="score">🧍 You: <span id="player">10</span></span>
+        <span class="score">🤖 Opponent: <span id="opponent">10</span></span>
+      </div>
+
+      <div class="buttons">
+        <button class="odd" onclick="guess('odd')">🔴 Odd</button>
+        <button class="even" onclick="guess('even')">🔵 Even</button>
+      </div>
+    </div>
+    <div id="gameOver" class="overlay1">
+      <div class="overlay-content1">
+        <div id="resultText"></div>
+        <button id="restart" onclick="restartGame()">🔄 Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/marblegame.js"></script>
+</body>
+</html>

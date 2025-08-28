@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shape Drawing Game - Squid Theme</title>
+    <link rel="stylesheet" href="../../styles/style.css" />
+  <link rel="stylesheet" href="../../styles/selectside.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">🦑 Dalgona Drawing Game 🦑</h1>
+
+    <div class="game-area">
+      <canvas id="gameCanvas" width="500" height="500"></canvas>
+    </div>
+
+    <div class="info-bar">
+      <h3 id="lives">❤️ Lives: 3</p>
+      <h3 id="level">⭐ Level: 1</p>
+      <h3 id="timer">⏱️ Time: 20s</p>
+    </div>
+
+    <p id="result">Draw along the shape to pass!</p>
+  </div>
+
+  <script src="../../js/dalgona.js"></script>
+</body>
+</html>
