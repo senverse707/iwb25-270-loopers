@@ -75,10 +75,17 @@ toml
 host = "localhost"
 port = 3306
 user = "root"
-password = "your_mysql_password"
+password = "your_mysql_password" #here change into your mysql password
 database = "squidgames"
 
 Edit 'backend/main.bal':
+
+// Database configuration
+configurable string host = "localhost";
+configurable int port = 3306;
+configurable string user = "root";
+configurable string password = "your_password"; #here change into your mysql password
+configurable string database = "squidgames_DB";
 
 
 ### 4. Run the Ballerina Service
