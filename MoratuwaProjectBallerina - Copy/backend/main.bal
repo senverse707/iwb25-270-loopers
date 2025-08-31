@@ -8,7 +8,7 @@ import ballerina/log;
 configurable string host = "localhost";
 configurable int port = 3306;
 configurable string user = "root";
-configurable string password = "newpassword";
+configurable string password = "your_password";
 configurable string database = "squidgames_DB";
 
 // MySQL client
