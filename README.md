@@ -68,7 +68,7 @@ This will create the required tables (e.g., `users`).
 
 ### 3. Configure Database Credentials
 
-Edit `backend/Config.toml`:
+Edit 'backend/Config.toml':
 
 toml
 [database]
@@ -78,7 +78,7 @@ user = "root"
 password = "your_mysql_password"
 database = "squidgames"
 
-
+Edit 'backend/main.bal':
 
 
 ### 4. Run the Ballerina Service
