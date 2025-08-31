@@ -20,7 +20,7 @@ A fan-made **Squid Game–themed website** featuring user authentication, polls,
 
 - Includes **SQL setup scripts**,**REST APIs**, and **frontend integration**.
 
-# Moratuwa Project – Ballerina & MySQL Authentication
+## ***Moratuwa Project – Ballerina & MySQL Authentication***
 
 This part of the project implements:
 
