@@ -1,7 +1,8 @@
-#iwb25-270-loopers
+iwb25-270-loopers
+# Squid-Verse
 
 
-_Project Overview_
+## ***Project Overview***
 
 A fan-made Squid Game–themed website featuring user authentication, polls, and interactive game-inspired sections. The backend is powered by Ballerina with a MySQL database, while additional features like polls use Node.js. Includes SQL setup scripts, APIs, and frontend integration to recreate the immersive Squid Game experience online
 
@@ -23,7 +24,7 @@ REST APIs for registration and login
 
 Node.js backend for poll features
 
-Prerequisites
+## ***Prerequisites***
 
 Before running, install:
 
@@ -33,7 +34,8 @@ MySQL (Workbench or CLI)
 
 Node.js (for poll backend)
 
-Project Structure
+## ***Project Structure***
+```
 MoratuwaProjectBallerina/
 │── backend/
 │   ├── main.bal              # Ballerina service (auth system)
@@ -48,85 +50,91 @@ MoratuwaProjectBallerina/
 │       └── index.js
 │
 │── frontend/                 # Frontend UI
-
-Setup Instructions
-1. Extract Project
+```
+## ***Setup Instructions***
+### 1. Extract Project
 unzip MoratuwaProjectBallerina.zip
+```
 cd MoratuwaProjectBallerina/backend
-
-2. Setup MySQL Database
+```
+### 2. Setup MySQL Database
 
 Run the provided SQL script:
-
+```
 CREATE DATABASE squidgames;
 USE squidgames;
 SOURCE scripts/setup.sql;
-
+```
 
 This will create the required tables (e.g., users).
 
-3. Configure Database Credentials
+### 3. Configure Database Credentials
 
 Edit backend/Config.toml:
-
+```
 [database]
 host = "localhost"
 port = 3306
 user = "root"
 password = "your_mysql_password"   # <-- change here
 database = "squidgames"
-
+```
 
 Also update backend/main.bal if needed:
-
+```
 configurable string host = "localhost";
 configurable int port = 3306;
 configurable string user = "root";
 configurable string password = "your_password";  // <-- change here
 configurable string database = "squidgames";
-
-4. Run the Ballerina Service
+```
+### 4. Run the Ballerina Service
 
 From the backend/ folder:
-
+```
 bal run
-
+```
 
 The service will start at: http://localhost:8080
 
-5. API Testing
+### 5. API Testing
 
 You can test with curl or the provided file scripts/test_api.http.
 
 Register User
-
+```
 curl -X POST http://localhost:8080/register \
 -H "Content-Type: application/json" \
 -d '{"username":"john","email":"john@example.com","password":"mypassword"}'
-
+```
 
 Login User
 
+```
 curl -X POST http://localhost:8080/login \
 -H "Content-Type: application/json" \
 -d '{"email":"john@example.com","password":"mypassword"}'
-
-6. Run Poll Backend (Node.js)
+```
+### 6. Run Poll Backend (Node.js)
 
 Navigate to the poll service folder:
 
 cd backend/squid-poll-backend
+```
 npm install
+```
+Then run:
+```
 node index.js
-
+```
 Expected API Responses
 
-✅ Success
+### ✅ Success
 
 { "message": "User registered successfully" }
 
 
-❌ Failure
+### ❌ Failure
 
 { "error": "Invalid email or password" }
 
