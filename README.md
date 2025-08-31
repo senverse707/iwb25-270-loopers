@@ -1,145 +1,141 @@
-# iwb25-270-loopers
-A fan-made Squid Game–themed website featuring user authentication, polls, and interactive game-inspired sections. The backend is powered by Ballerina with a MySQL database, while additional features like polls use Node.js. Includes SQL setup scripts, APIs, and frontend integration to recreate the immersive Squid Game experience online.
+iwb25-270-loopers
+Project Overview
 
+A fan-made Squid Game–themed website featuring user authentication, polls, and interactive game-inspired sections. The backend is powered by Ballerina with a MySQL database, while additional features like polls use Node.js. Includes SQL setup scripts, APIs, and frontend integration to recreate the immersive Squid Game experience online
 
-# Moratuwa Project – Ballerina & MySQL Authentication
+Backend: Ballerina with MySQL for authentication
 
-This project implements a **user authentication system** and related APIs using **Ballerina**, **MySQL**, and supporting scripts.  
-It also includes Node.js components for poll features.
+Polls: Node.js service
 
+Frontend: Integrated with APIs for an immersive Squid Game experience
 
+Includes SQL setup scripts, REST APIs, and frontend integration.
 
-##  Project Structure
+Moratuwa Project – Ballerina & MySQL Authentication
 
+This part of the project implements:
 
-MoratuwaProjectBallerina/
-│── backend/
-│   ├── main.bal                # Ballerina service (auth system)
-│   ├── Ballerina.toml           # Project dependencies
-│   ├── Config.toml              # Database configuration
-│   ├── Dependencies.toml
-│   ├── scripts/
-│   │   ├── setup.sql            # Initial DB setup
-│   │   ├── squidgames_db.sql    # Example schema for game DB
-│   │   └── test_api.http        # API test collection
-│   └── squid-poll-backend/      # Node.js backend for poll feature
-│   └── index.js
-│
-│__ frontend      
+User authentication system with Ballerina and MySQL
 
+REST APIs for registration and login
 
+Node.js backend for poll features
 
-
-
-
-##  Prerequisites
+Prerequisites
 
 Before running, install:
 
-- **Ballerina** v2201.12.7 → [Download](https://ballerina.io/downloads/)  
-- **MySQL** (Workbench or CLI)  
-- **Node.js** (for poll backend)  
+Ballerina v2201.12.7 → Download here
 
+MySQL (Workbench or CLI)
 
+Node.js (for poll backend)
 
-##  Setup Instructions
+Project Structure
+MoratuwaProjectBallerina/
+│── backend/
+│   ├── main.bal              # Ballerina service (auth system)
+│   ├── Ballerina.toml        # Project dependencies
+│   ├── Config.toml           # Database configuration
+│   ├── Dependencies.toml
+│   ├── scripts/
+│   │   ├── setup.sql         # Initial DB setup
+│   │   ├── squidgames_db.sql # Example schema for game DB
+│   │   └── test_api.http     # API test collection
+│   └── squid-poll-backend/   # Node.js backend for poll feature
+│       └── index.js
+│
+│── frontend/                 # Frontend UI
 
-### 1. Extract Project
-
+Setup Instructions
+1. Extract Project
 unzip MoratuwaProjectBallerina.zip
 cd MoratuwaProjectBallerina/backend
 
-
-
-
-### 2. Setup MySQL Database
+2. Setup MySQL Database
 
 Run the provided SQL script:
 
-sql
 CREATE DATABASE squidgames;
 USE squidgames;
 SOURCE scripts/setup.sql;
 
 
-This will create the required tables (e.g., `users`).
+This will create the required tables (e.g., users).
 
+3. Configure Database Credentials
 
+Edit backend/Config.toml:
 
-### 3. Configure Database Credentials
-
-Edit 'backend/Config.toml':
-
-toml
 [database]
 host = "localhost"
 port = 3306
 user = "root"
-password = "your_mysql_password" #here change into your mysql password
+password = "your_mysql_password"   # <-- change here
 database = "squidgames"
 
-Edit 'backend/main.bal':
 
-// Database configuration
+Also update backend/main.bal if needed:
+
 configurable string host = "localhost";
 configurable int port = 3306;
 configurable string user = "root";
-configurable string password = "your_password"; #here change into your mysql password
-configurable string database = "squidgames_DB";
+configurable string password = "your_password";  // <-- change here
+configurable string database = "squidgames";
 
+4. Run the Ballerina Service
 
-### 4. Run the Ballerina Service
+From the backend/ folder:
 
-From the `backend/` folder:
 bal run
 
-The service will start at `http://localhost:8080`.
+
+The service will start at: http://localhost:8080
+
+5. API Testing
+
+You can test with curl or the provided file scripts/test_api.http.
+
+Register User
+
+curl -X POST http://localhost:8080/register \
+-H "Content-Type: application/json" \
+-d '{"username":"john","email":"john@example.com","password":"mypassword"}'
 
 
+Login User
 
-### 5. API Testing
+curl -X POST http://localhost:8080/login \
+-H "Content-Type: application/json" \
+-d '{"email":"john@example.com","password":"mypassword"}'
 
-You can test with **curl** or the provided file `scripts/test_api.http`.
+6. Run Poll Backend (Node.js)
 
-**Example – Register User:**
+Navigate to the poll service folder:
 
-curl -X POST http://localhost:8080/register      -H "Content-Type: application/json"      -d '{"username":"john","email":"john@example.com","password":"mypassword"}'
-
-**Example – Login User:**
-
-curl -X POST http://localhost:8080/login      -H "Content-Type: application/json"      -d '{"email":"john@example.com","password":"mypassword"}'
-
-
-
-
-### 6.  Run Poll Backend
-
-Navigate to the poll service:
-
-
-You  must run npm install the first time when open the project.
-( Because npm install reads the package.json file and downloads all the dependencies (like Express, dotenv, etc.) that your project needs.)
-
-
-then you can run:
+cd backend/squid-poll-backend
+npm install
 node index.js
 
+Expected API Responses
 
+✅ Success
 
-
-## Expected API Responses
-
-**Success**
-json
 { "message": "User registered successfully" }
 
 
-**Failure**
-json
+❌ Failure
+
 { "error": "Invalid email or password" }
 
+Additional Notes
 
+Always check Config.toml for correct DB credentials before running.
 
+Use scripts/test_api.http inside VS Code REST Client for quick API testing.
 
+First-time Node.js setup requires npm install.
 
- 
+License
+
+MIT
