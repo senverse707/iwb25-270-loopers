@@ -38,7 +38,7 @@ Before running, install:
 
 - **Ballerina** v2201.12.7 → [Download](https://ballerina.io/downloads/)  
 - **MySQL** (Workbench or CLI)  
-- **Node.js** (for poll backend, optional)  
+- **Node.js** (for poll backend)  
 
 
 
@@ -48,6 +48,7 @@ Before running, install:
 
 unzip MoratuwaProjectBallerina.zip
 cd MoratuwaProjectBallerina/backend
+
 
 
 
@@ -107,13 +108,16 @@ curl -X POST http://localhost:8080/login      -H "Content-Type: application/json
 
 
 
-### 6. (Optional) Run Poll Backend
+### 6.  Run Poll Backend
 
 Navigate to the poll service:
 
 
-cd backend/squid-poll-backend
-npm install
+You  must run npm install the first time when open the project.
+( Because npm install reads the package.json file and downloads all the dependencies (like Express, dotenv, etc.) that your project needs.)
+
+
+then you can run:
 node index.js
 
 
