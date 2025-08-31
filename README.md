@@ -23,7 +23,9 @@ MoratuwaProjectBallerina/
 │   │   ├── squidgames_db.sql    # Example schema for game DB
 │   │   └── test_api.http        # API test collection
 │   └── squid-poll-backend/      # Node.js backend for poll feature
-│       └── index.js
+│   └── index.js
+│
+│__ frontend      
 
 
 
