@@ -91,10 +91,7 @@ configurable string database = "squidgames_DB";
 ### 4. Run the Ballerina Service
 
 From the `backend/` folder:
-
-
 bal run
-
 
 The service will start at `http://localhost:8080`.
 
