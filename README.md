@@ -136,6 +136,3 @@ Use scripts/test_api.http inside VS Code REST Client for quick API testing.
 
 First-time Node.js setup requires npm install.
 
-License
-
-MIT
